@@ -1,66 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Canal Communications Group Inc</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Canal Communications Group Inc</title>
+  <style>
+    :root{
+      --bg0: #050a12;
+      --bg1: #081a2c;
+      --accent: #29b7ff;
+      --accent2:#00ffd5;
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --glass: rgba(255,255,255,0.07);
+      --glass2: rgba(255,255,255,0.10);
+      --stroke: rgba(255,255,255,0.14);
+      --shadow: rgba(0,0,0,0.35);
+    }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(-45deg, #0b1f3a, #123a5c, #0b1f3a);
-    background-size: 400% 400%;
-    animation: flow 20s ease infinite;
-    color: white;
-}
+    *{ box-sizing:border-box; }
+    html, body { height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1000px 600px at 20% 10%, rgba(41,183,255,0.22), transparent 65%),
+                  radial-gradient(900px 600px at 85% 25%, rgba(0,255,213,0.16), transparent 60%),
+                  radial-gradient(900px 700px at 50% 100%, rgba(41,183,255,0.10), transparent 60%),
+                  linear-gradient(160deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
+    }
 
-@keyframes flow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+    /* Animated background canvas */
+    #bg-canvas{
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      display:block;
+    }
 
-.container {
-    max-width: 900px;
-    margin: 100px auto;
-    text-align: center;
-    padding: 20px;
-}
+    /* subtle vignette */
+    .vignette{
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events:none;
+      background:
+        radial-gradient(900px 600px at 50% 0%, rgba(0,0,0,0.10), transparent 60%),
+        radial-gradient(900px 700px at 50% 100%, rgba(0,0,0,0.30), transparent 55%),
+        radial-gradient(1200px 800px at 0% 50%, rgba(0,0,0,0.22), transparent 60%),
+        radial-gradient(1200px 800px at 100% 50%, rgba(0,0,0,0.22), transparent 60%);
+    }
 
-h1 {
-    font-size: 42px;
-    margin-bottom: 20px;
-}
+    /* Topbar */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding: 14px 22px;
+      background: rgba(0,0,0,0.28);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .brand{
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
+    }
+    .brand-dot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 16px rgba(41,183,255,0.55);
+    }
+    .nav{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      color: var(--muted);
+      text-decoration:none;
+      font-weight:600;
+      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: 0.2s ease;
+    }
+    .nav a:hover{
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
+    }
 
-p {
-    font-size: 18px;
-    line-height: 1.6;
-}
+    /* Layout */
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 34px 18px 70px;
+    }
 
-.glass {
-    background: rgba(255,255,255,0.08);
-    padding: 30px;
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-}
-</style>
+    .glass{
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      border-radius: 18px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 18px 50px var(--shadow);
+    }
+
+    .hero{
+      padding: 28px 22px;
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+      .nav{ display:none; }
+    }
+
+    h1{
+      margin: 0 0 10px;
+      font-size: 40px;
+      line-height: 1.08;
+      letter-spacing: -0.6px;
+    }
+    .tagline{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 52ch;
+    }
+
+    .cta{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.14);
+      text-decoration:none;
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--text);
+      background: rgba(255,255,255,0.07);
+      transition: 0.2s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.10);
+    }
+    .btn.primary{
+      border: 1px solid rgba(41,183,255,0.40);
+      background: linear-gradient(135deg, rgba(41,183,255,0.25), rgba(0,255,213,0.18));
+      box-shadow: 0 0 22px rgba(41,183,255,0.18);
+    }
+
+    .side{
+      padding: 20px 18px;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      justify-content:center;
+    }
+
+    .pill{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.18);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+      width: fit-content;
+    }
+    .pill i{
+      width: 10px;height:10px;border-radius:999px;
+      background: var(--accent);
+      box-shadow: 0 0 16px rgba(41,183,255,0.55);
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+    @media (max-width: 900px){
+      .cards{ grid-template-columns: 1fr; }
+    }
+    .card{
+      padding: 16px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+    }
+    .card h3{
+      margin:0 0 8px;
+      font-size: 15px;
+      letter-spacing: -0.2px;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+
+    section{
+      margin-top: 18px;
+      padding: 18px 18px;
+    }
+    section h2{
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: -0.2px;
+    }
+    section p{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .steps{
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .steps b{ color: var(--text); }
+
+    .footer{
+      margin-top: 18px;
+      padding: 14px 18px;
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+      color: rgba(255,255,255,0.58);
+      font-size: 12.5px;
+    }
+    .footer a{ color: rgba(255,255,255,0.70); text-decoration:none; }
+    .footer a:hover{ color: rgba(255,255,255,0.92); }
+  </style>
 </head>
 
 <body>
+  <canvas id="bg-canvas"></canvas>
+  <div class="vignette"></div>
 
-<div class="container">
-    <div class="glass">
-        <h1>Canal Communications Group Inc</h1>
-        <p>
-        Structured Growth. Strategic Communication. Directed Expansion.
-        </p>
-        <p>
-        We support organizations in operational structuring,
-        communication alignment, and scalable infrastructure development.
-        </p>
+  <div class="topbar">
+    <div class="brand"><span class="brand-dot"></span>Canal Communications Group Inc</div>
+    <div class="nav">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
     </div>
-</div>
+  </div>
 
+  <main class="wrap">
+    <div class="glass hero">
+      <div>
+        <h1>Structured Growth. Strategic Communication. Directed Expansion.</h1>
+        <p class="tagline">
+          Canal Communications Group Inc supports organizations with clear positioning, credible digital presence,
+          and operational structure—so your business looks fundable, trustworthy, and ready to scale.
+        </p>
+
+        <div class="cta">
+          <a class="btn primary" href="#contact">Request a Consultation</a>
+          <a class="btn" href="#services">View Services</a>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <h3>Authority Presence</h3>
+            <p>Professional brand structure + web presence aligned to your business direction.</p>
+          </div>
+          <div class="card">
+            <h3>Operational Structuring</h3>
+            <p>System setup for task flow, documentation, and repeatable processes.</p>
+          </div>
+          <div class="card">
+            <h3>Communication Alignment</h3>
+            <p>Clear messaging and a narrative framework you can confidently explain.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="glass side">
+        <div class="pill"><i></i> Modern Strategic Tech Tone</div>
+        <div class="pill"><i></i> Clean, Executive, Fundable Look</div>
+        <div class="pill"><i></i> Built for Expansion + Funnels</div>
+        <p style="margin:0;color:var(--muted);line-height:1.65;font-size:13.5px;">
+          This site is designed to feel premium and forward-looking—while staying simple enough to explain clearly in a bank or business meeting.
+        </p>
+      </aside>
+    </div>
+
+    <section id="about" class="glass">
+      <h2>About</h2>
+      <p>
+        Canal Communications Group Inc provides structured support for organizations seeking clarity, credibility,
+        and operational readiness. Our work focuses on building clear positioning, a professional digital presence,
+        and scalable infrastructure systems.
+      </p>
+    </section>
+
+    <section id="services" class="glass">
+      <h2>Services</h2>
+      <p>
+        Website build + brand narrative, professional email setup, domain & DNS migration, and a foundation-ready structure
+        for future funnels, integrations, and growth components.
+      </p>
+    </section>
+
+    <section id="process" class="glass">
+      <h2>How We Work</h2>
+      <ol class="steps">
+        <li><b>Discovery:</b> Clarify goals, audience, and intended business direction.</li>
+        <li><b>Foundation:</b> Build website + identity structure + system base.</li>
+        <li><b>Execution:</b> Implement content, visuals, and functional assets.</li>
+        <li><b>Expansion:</b> Add funnels, integrations, and growth components.</li>
+      </ol>
+    </section>
+
+    <section id="contact" class="glass">
+      <h2>Contact</h2>
+      <p>
+        Email: <a style="color:rgba(255,255,255,0.88)" href="mailto:contact@canalcommunicationsgroupinc.com">contact@canalcommunicationsgroupinc.com</a><br/>
+        For inquiries, include your name, company, and what you want your website to accomplish.
+      </p>
+    </section>
+
+    <div class="glass footer">
+      <div>© <span id="year"></span> Canal Communications Group Inc. All rights reserved.</div>
+      <div><a href="#about">Back to top</a></div>
+    </div>
+  </main>
+
+  <script>
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ===== Animated “Canal Flow” background (tech-water feel) =====
+    const canvas = document.getElementById("bg-canvas");
+    const ctx = canvas.getContext("2d");
+
+    function resize() {
+      const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+      canvas.width = Math.floor(window.innerWidth * dpr);
+      canvas.height = Math.floor(window.innerHeight * dpr);
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    // Simple smooth noise function
+    const fract = (x) => x - Math.floor(x);
+    const rand = (x) => fract(Math.sin(x) * 43758.5453123);
+    const lerp = (a,b,t) => a + (b-a)*t;
+
+    function noise1D(x){
+      const i = Math.floor(x);
+      const f = x - i;
+      const u = f*f*(3-2*f);
+      return lerp(rand(i), rand(i+1), u);
+    }
+
+    let t = 0;
+    function draw(){
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      ctx.clearRect(0,0,w,h);
+
+      // subtle grid glow
+      ctx.globalAlpha = 0.08;
+      ctx.strokeStyle = "rgba(255,255,255,0.35)";
+      ctx.lineWidth = 1;
+      const step = 60;
+      for(let x=0;x<w;x+=step){
+        ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke();
+      }
+      for(let y=0;y<h;y+=step){
+        ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke();
+      }
+
+      // flowing “canal lines”
+      ctx.globalAlpha = 1;
+      const lines = 14;
+      for(let i=0;i<lines;i++){
+        const baseY = (h/(lines+1))*(i+1);
+        const phase = i*0.35;
+
+        // gradient stroke
+        const grad = ctx.createLinearGradient(0, baseY, w, baseY);
+        grad.addColorStop(0, "rgba(41,183,255,0.00)");
+        grad.addColorStop(0.25, "rgba(41,183,255,0.22)");
+        grad.addColorStop(0.60, "rgba(0,255,213,0.18)");
+        grad.addColorStop(1, "rgba(0,255,213,0.00)");
+        ctx.strokeStyle = grad;
+
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        for(let x=0;x<=w;x+=12){
+          const n = noise1D(x*0.01 + t*0.9 + phase);
+          const n2 = noise1D(x*0.015 + t*0.55 + phase*2.0);
+          const amp = 38 + i*2;
+          const y = baseY + (n-0.5)*amp + (n2-0.5)*(amp*0.6);
+          if(x===0) ctx.moveTo(x,y);
+          else ctx.lineTo(x,y);
+        }
+        ctx.stroke();
+
+        // sparkle nodes
+        ctx.fillStyle = "rgba(41,183,255,0.22)";
+        for(let k=0;k<4;k++){
+          const px = (w/4)*k + (noise1D(t*2 + i + k)*120);
+          const pn = noise1D(px*0.01 + t + phase);
+          const py = baseY + (pn-0.5)*40;
+          ctx.beginPath();
+          ctx.arc(px, py, 2.2, 0, Math.PI*2);
+          ctx.fill();
+        }
+      }
+
+      // slow drift
+      t += 0.006;
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
 </body>
 </html>
