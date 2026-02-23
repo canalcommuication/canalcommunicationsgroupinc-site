@@ -307,6 +307,72 @@
   50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 16px rgba(0,200,255,0.85); }
 
 } 
+    /* ===== FIX TOP BRAND SIZE ===== */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:nowrap;
+}
+
+.top-logo{
+  height:26px;
+  width:auto;
+  display:block;
+}
+
+.brand-name{
+  font-weight:600;
+  white-space:nowrap;
+}
+
+/* mobile */
+@media (max-width:640px){
+  .top-logo{ height:22px; }
+  .brand-name{ font-size:16px; }
+}
+/* ===== FIX FOOTER SIZE ===== */
+.footer-logo{
+  height:32px;
+  width:auto;
+  display:block;
+  opacity:0.9;
+}
+    /* ===== CLEAN CONTACT GRID ===== */
+.contact-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:16px;
+  margin-top:12px;
+}
+
+.contact-item{
+  padding:14px;
+  border-radius:16px;
+  background: rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.contact-label{
+  font-size:12px;
+  opacity:0.7;
+  margin-bottom:6px;
+  text-transform:uppercase;
+}
+
+.contact-value{
+  font-size:16px;
+}
+
+.contact-span{
+  grid-column:1 / -1;
+}
+
+@media (max-width:640px){
+  .contact-grid{
+    grid-template-columns:1fr;
+  }
+}
   </style>
 </head>
 
@@ -316,12 +382,11 @@
 
 <div class="topbar">
 
-  <div class="brand">
-    <img class="top-logo" src="assets-logos-logo-mark.png" alt="Canal Communications Group Inc">
-    <span class="brand-dot"></span>
-    Canal Communications Group Inc
-  </div>
-
+<div class="brand">
+  <img class="top-logo" src="assets-logos/logo-mark.png" alt="">
+  <span class="brand-dot"></span>
+  <span class="brand-name">Canal Communications Group Inc</span>
+</div>
   <div class="nav">
     <a href="#about">About</a>
     <a href="#services">Services</a>
@@ -361,11 +426,11 @@
       </div>
 
       <aside class="glass side">
-        <div class="pill"><i></i> Modern Strategic Tech Tone</div>
-        <div class="pill"><i></i> Clean, Executive, Fundable Look</div>
-        <div class="pill"><i></i> Built for Expansion + Funnels</div>
+        <div class="pill"><i></i>Executive Communication & Brand Authority</div>
+        <div class="pill"><i></i>Public Relations & Media Strategy</div>
+        <div class="pill"><i></i>Corporate Messaging & Positioning</div>        
         <p style="margin:0;color:var(--muted);line-height:1.65;font-size:13.5px;">
-          This site is designed to feel premium and forward-looking—while staying simple enough to explain clearly in a bank or business meeting.
+         
         </p>
       </aside>
     </div>
@@ -397,14 +462,33 @@
       </ol>
     </section>
 
-    <section id="contact" class="glass">
-      <h2>Contact</h2>
-      <p>
-        Email: <a style="color:rgba(255,255,255,0.88)" href="mailto:contact@canalcommunicationsgroupinc.com">contact@canalcommunicationsgroupinc.com</a><br/>
-        For inquiries, include your name, company, and what you want your website to accomplish.
-      </p>
-    </section>
-    
+<section id="contact" class="glass">
+  <h2>Contact</h2>
+
+  <div class="contact-grid">
+    <div class="contact-item">
+      <div class="contact-label">Email</div>
+      <a class="contact-value" href="mailto:contact@canalcommunicationsgroupinc.com">
+        contact@canalcommunicationsgroupinc.com
+      </a>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-label">Phone</div>
+      <a class="contact-value" href="tel:+1XXXXXXXXXX">
+        +1 (424) 320-8689
+      </a>
+    </div>
+
+    <div class="contact-item contact-span">
+      <div class="contact-label">Address</div>
+      <div class="contact-value">
+      8484 WILSHIRE BOULEVARD SUITE 515 
+        BEVERLY HILLS CA. 90211 <br>
+      </div>
+    </div>
+  </div>
+</section>    
 <div class="glass footer">
   <div class="footer-left">
     <img class="footer-logo" src="assets-logos-logo-horizontal.png" alt="Canal Communications Group Inc">
