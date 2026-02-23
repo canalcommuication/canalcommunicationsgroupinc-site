@@ -71,9 +71,9 @@
     .brand{
       font-weight: 800;
       letter-spacing: 0.2px;
-      display:flex;
-      align-items:center;
-      gap:10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       white-space:nowrap;
     }
     .brand-dot{
@@ -251,18 +251,62 @@
     }
     .steps b{ color: var(--text); }
 
-    .footer{
-      margin-top: 18px;
-      padding: 14px 18px;
-      display:flex;
-      justify-content:space-between;
-      gap: 10px;
-      flex-wrap:wrap;
-      color: rgba(255,255,255,0.58);
-      font-size: 12.5px;
-    }
+.footer{
+  margin-top: 18px;
+  padding: 14px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap: 12px;
+  flex-wrap:wrap;
+  color: rgba(255,255,255,0.70);
+  font-size: 12.5px;
+  
+}
     .footer a{ color: rgba(255,255,255,0.70); text-decoration:none; }
     .footer a:hover{ color: rgba(255,255,255,0.92); }
+    .footer-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.footer-logo{
+  height:20px;
+  width:auto;
+  opacity:0.9;
+}
+
+.footer-meta{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.footer-links{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.footer .dot{
+  opacity:0.45;
+}
+
+.brand-dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background: rgba(0, 200, 255, 0.95);
+  box-shadow: 0 0 10px rgba(0, 200, 255, 0.55);
+  animation: brandPulse 1.6s ease-in-out infinite;
+}
+@keyframes brandPulse{
+  0%, 100% { transform: scale(1); opacity: 0.75; box-shadow: 0 0 8px rgba(0,200,255,0.45); }
+  50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 16px rgba(0,200,255,0.85); }
+
+} 
   </style>
 </head>
 
@@ -270,16 +314,22 @@
   <canvas id="bg-canvas"></canvas>
   <div class="vignette"></div>
 
-  <div class="topbar">
-    <div class="brand"><span class="brand-dot"></span>Canal Communications Group Inc</div>
-    <div class="nav">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#process">Process</a>
-      <a href="#contact">Contact</a>
-    </div>
+<div class="topbar">
+
+  <div class="brand">
+    <img class="top-logo" src="assets-logos-logo-mark.png" alt="Canal Communications Group Inc">
+    <span class="brand-dot"></span>
+    Canal Communications Group Inc
   </div>
 
+  <div class="nav">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+</div>
   <main class="wrap">
     <div class="glass hero">
       <div>
@@ -340,10 +390,10 @@
     <section id="process" class="glass">
       <h2>How We Work</h2>
       <ol class="steps">
-        <li><b>Discovery:</b> Clarify goals, audience, and intended business direction.</li>
-        <li><b>Foundation:</b> Build website + identity structure + system base.</li>
-        <li><b>Execution:</b> Implement content, visuals, and functional assets.</li>
-        <li><b>Expansion:</b> Add funnels, integrations, and growth components.</li>
+        <li><b>Discovery:</b> Clarify operational goals, positioning, and digital requirements.</li>
+        <li><b>Foundation:</b> Establish structured web presence and communication framework.</li>
+        <li><b>Execution:</b> Deploy structured content, branding elements, and system setup.</li>
+        <li><b>Expansion:</b> Integrate intake systems, automation, and scalable infrastructure.</li>      
       </ol>
     </section>
 
@@ -354,11 +404,26 @@
         For inquiries, include your name, company, and what you want your website to accomplish.
       </p>
     </section>
-
-    <div class="glass footer">
+    
+<div class="glass footer">
+  <div class="footer-left">
+    <img class="footer-logo" src="assets-logos-logo-horizontal.png" alt="Canal Communications Group Inc">
+    <div class="footer-meta">
       <div>© <span id="year"></span> Canal Communications Group Inc. All rights reserved.</div>
-      <div><a href="#about">Back to top</a></div>
+      <div class="footer-links">
+        <a href="#services">Services</a><span class="dot">•</span>
+        <a href="#process">Process</a><span class="dot">•</span>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
+    
+  </div>
+  <div class="footer-right">
+    <a href="#about">Back to top</a>
+  </div>
+</div>
+
+    
   </main>
 
 <script>
