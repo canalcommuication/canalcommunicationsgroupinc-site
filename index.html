@@ -410,6 +410,70 @@
   0%{transform:translateX(0);}
   100%{transform:translateX(50%);}
 }
+/* FAQ Accordion */
+.faq-accordion {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.faq-item {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.02);
+  transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease;
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary span:first-child {
+  font-weight: 600;
+}
+
+.faq-icon {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid rgba(255,255,255,0.7);
+  border-bottom: 2px solid rgba(255,255,255,0.7);
+  transform: rotate(-45deg);
+  transition: transform 200ms ease, filter 200ms ease;
+  filter: drop-shadow(0 0 0 rgba(0,0,0,0));
+}
+
+.faq-item[open] {
+  border-color: rgba(0, 255, 200, 0.45);
+  box-shadow: 0 0 0 1px rgba(0, 255, 200, 0.18), 0 0 18px rgba(0, 255, 200, 0.12);
+  background: rgba(0, 255, 200, 0.03);
+}
+
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+  filter: drop-shadow(0 0 10px rgba(0, 255, 200, 0.35));
+}
+
+.faq-content {
+  padding: 0 16px 14px 16px;
+  color: rgba(255,255,255,0.88);
+}
+
+.faq-content p {
+  margin: 0;
+  line-height: 1.55;
+}
   </style>
 </head>
 
@@ -555,6 +619,64 @@
     <li>Comfortable working with owners who prefer phone calls and concise summaries while still benefiting from up-to-date technology</li>
   </ul>
 </section>
+</section>
+    <section id="faq" class="glass">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-accordion" role="list">
+    <details class="faq-item" role="listitem">
+      <summary>
+        <span>Do I need to replace my current systems to use Canal Communications?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </summary>
+      <div class="faq-content">
+        <p>No. We work with what you already use. The portal helps organize and coordinate your existing documents, workflows, and tools without forcing unnecessary disruption.</p>
+      </div>
+    </details>
+
+    <details class="faq-item" role="listitem">
+      <summary>
+        <span>Is my company’s data secure?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </summary>
+      <div class="faq-content">
+        <p>Yes. The portal uses secure, cloud-based infrastructure with controlled access permissions and role-based visibility.</p>
+      </div>
+    </details>
+
+    <details class="faq-item" role="listitem">
+      <summary>
+        <span>Can you help if my information is currently in paper files or spreadsheets?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </summary>
+      <div class="faq-content">
+        <p>Absolutely. Many clients start with scattered files. We map and migrate your key information into a clean, organized structure—without overwhelming you.</p>
+      </div>
+    </details>
+
+    <details class="faq-item" role="listitem">
+      <summary>
+        <span>Do you work with owners who operate multiple companies?</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </summary>
+      <div class="faq-content">
+        <p>Yes. We can support single-entity and multi-entity structures under one owner, with clear separation and visibility where needed.</p>
+      </div>
+    </details>
+  </div>
+</section> 
+<script>
+  // FAQ: allow only one open at a time
+  document.querySelectorAll('#faq details.faq-item').forEach((d) => {
+    d.addEventListener('toggle', () => {
+      if (d.open) {
+        document.querySelectorAll('#faq details.faq-item').forEach((other) => {
+          if (other !== d) other.open = false;
+        });
+      }
+    });
+  });
+</script>
 <section id="contact" class="glass">
 <h2>Speak With Canal Communications Inc</h2>
 <p>
