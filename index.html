@@ -593,8 +593,25 @@
   fill: rgba(41,183,255,0.95);
   filter: drop-shadow(0 0 8px rgba(41,183,255,0.55));
 }
+/* ===== Service Mini Dot ===== */
+.mini-dot{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  margin-right:10px;
+  background: rgba(41,183,255,0.95);
+  box-shadow:
+    0 0 10px rgba(41,183,255,0.55),
+    0 0 22px rgba(41,183,255,0.25);
+  transform: translateY(-1px);
+  animation: dotPulse 2.2s ease-in-out infinite;
+}
 
-.social-btn:hover{
+@keyframes dotPulse{
+  0%,100% { opacity: .55; }
+  50%     { opacity: 1; }
+}.social-btn:hover{
   transform: translateY(-1px);
   background: rgba(255,255,255,0.10);
   box-shadow: 0 0 0 1px rgba(41,183,255,0.18), 0 0 18px rgba(41,183,255,0.16);
@@ -603,29 +620,360 @@
 @media (max-width:640px){
   .social-row{ justify-content:flex-start; }
 }
+    @media (max-width: 640px){
+  .footer{
+    padding-bottom: 18px;
+  }
+
+  .footer-right{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-items:flex-start;
+  }
+
+  .footer-right a[href="#about"]{
+    order: 3;              /* pushes "Back to top" below socials */
+    margin-top: 6px;
+    align-self:flex-start; /* keeps it from floating awkwardly */
+  }
+
+  .social-row{
+    order: 2;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .footer-credit{
+    order: 1;
+  }
+/* ===== Topbar Mobile Cleanup ===== */
+.topbar{
+  flex-direction:column;
+  align-items:flex-start;
+  gap:10px;
+}
+
+.brand{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.nav{
+  width:100%;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+}  
   </style>
 </head>
 
-@@ -597,15 +652,15 @@
+<body>
+  <canvas id="bg-canvas"></canvas>
+  <div class="vignette"></div>
+
+  <div class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <img class="top-logo" src="assets-logos-logo-mark.png" alt="" />
+      <span class="brand-name">Canal Communications Group Inc</span>
+    </div>
+    <div class="nav">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+
+  <main class="wrap">
+
+    <!-- NEW: Visual block above heading -->
+    <div class="glass visual-block" aria-hidden="true">
+      <div class="visual-inner">
+        <div>
+          <p class="visual-title">Operational visibility, structured governance, and credible presence.</p>
+          <p class="visual-sub">A clean management layer that turns scattered documents and tasks into a controlled system—designed for serious operators.</p>
+        </div>
+        <div class="visual-badge">Management • Portal • Oversight</div>
+      </div>
+    </div>
+
+    <div class="glass hero">
+      <div>
+        <h1>Technology-Powered Management Services for Serious Businesses</h1>
+        <p class="tagline">
+          Canal Communications Inc helps business owners stay organized, compliant,
+          and professionally presented through a secure management portal and structured oversight.
+        </p>
+
+        <div class="cta">
+          <a class="btn primary" href="#contact">Request a Consultation</a>
+          <a class="btn" href="#services">View Services</a>
+        </div>
 
         <div class="cards">
           <div class="card">
-            <h3>Authority Presence</h3>
             <h3><span class="mini-dot"></span>Authority Presence</h3>            
             <p>Professional brand structure + web presence aligned to your business direction.</p>
           </div>
           <div class="card">
-            <h3>Operational Structuring</h3>
             <h3><span class="mini-dot"></span>Operational Structuring</h3>            
             <p>System setup for task flow, documentation, and repeatable processes.</p>
           </div>
           <div class="card">
-            <h3>Communication Alignment</h3>
             <h3><span class="mini-dot"></span>Communication Alignment</h3>            
             <p>Clear messaging and a narrative framework you can confidently explain.</p>
           </div>
         </div>
-@@ -856,314 +911,343 @@
+      </div>
+
+      <!-- UPDATED: Right panel now has dots + intake form (no redundant pills) -->
+      <aside class="glass side hero-panel">
+        <div class="pillar-visual" aria-hidden="true">
+          <canvas id="pillar-dots"></canvas>
+        </div>
+
+        <div>
+          <div class="intake-head">Request an Intro Call</div>
+          <p class="intake-sub">Send your details. You’ll receive a response to schedule a short call and review your current setup.</p>
+
+          <form class="intake-form" action="https://formspree.io/f/xpqjbvdk" method="POST">
+            <div class="intake-grid">
+              <label>
+                <span>Full Name</span>
+                <input name="name" type="text" required />
+              </label>
+              <label>
+                <span>Company</span>
+                <input name="company" type="text" />
+              </label>
+              <label>
+                <span>Email</span>
+                <input name="email" type="email" required />
+              </label>
+              <label>
+                <span>Phone</span>
+                <input name="phone" type="tel" />
+              </label>
+            </div>
+
+            <label>
+              <span>Primary need</span>
+              <select name="primary_need" required>
+                <option value="" disabled selected>Select one</option>
+                <option>Organizing records & deadlines</option>
+                <option>Corporate presence consistency</option>
+                <option>Financing / due diligence readiness</option>
+                <option>Portal setup & onboarding</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Short description</span>
+              <textarea name="message" rows="5" placeholder="Example: multiple entities, scattered files, renewals coming up, preparing for lender review…"></textarea>
+            </label>
+
+            <!-- Formspree subject / routing helpers -->
+            <input type="hidden" name="_subject" value="New Intake Request — Canal Communications Group Inc" />
+            <input type="hidden" name="_format" value="plain" />
+            <input type="hidden" name="_next" value="https://canalcommunicationsgroupinc.com/">            
+            <button type="submit" class="btn-primary">Submit Request</button>
+            <p class="fineprint">By submitting, you consent to be contacted about your request.</p>
+          </form>
+        </div>
+      </aside>
+    </div>
+
+    <section id="about" class="glass">
+      <h2>About Canal Communications Inc</h2>
+      <p>
+        Canal Communications Inc is a technology-driven management services firm that helps
+        businesses stay organized, compliant, and credible in a fast-moving, digital environment.
+        By combining a cloud-based management portal with hands-on support, we give owners a clearer
+        picture of how their company is operating and how it appears to the outside world.
+      </p>
+      <p>
+        We work especially well with owners who know their industry but do not want to live inside
+        software all day. Our focus is turning scattered documents, emails, and tasks into a streamlined,
+        easy-to-understand system that supports better decisions, cleaner reports, and a more
+        professional public image.
+      </p>
+
+      <h3>Who we typically help</h3>
+      <ul>
+        <li>Owners of single or multiple companies who want a simple way to manage critical records, dates, and documents</li>
+        <li>Professional service firms (consultants, contractors, agencies, small distributors) that need organized operations and a credible online presence</li>
+        <li>Founders preparing for financing, vendor accounts, or due diligence who need clean, accessible information and a clear story about their company</li>
+      </ul>
+    </section>
+
+    <section id="services" class="glass">
+      <h2>Services</h2>
+
+      <div class="cards">
+        <div class="card">
+          <h3>1. Operations Management Portal</h3>
+          <p>We provide a secure online portal that becomes the central hub for your company’s key information.</p>
+          <ul>
+            <li>Profiles for each entity, owner, and key role</li>
+            <li>Document vault for corporate records, agreements, policies, and key files</li>
+            <li>Task and reminder system for renewals, recurring admin work, and important dates</li>
+            <li>Simple dashboards that show status at a glance (what’s current, what’s overdue, what’s coming)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Corporate Presence &amp; Communications Management</h3>
+          <p>We use our tools and team to keep your external presence aligned with your real business.</p>
+          <ul>
+            <li>Monitoring and updating of core business information (name, address, phone, website) across your website and key directories</li>
+            <li>Standardized descriptions of your company so banks, vendors, and clients see a consistent story</li>
+            <li>Structured email and document templates for common communications (introductions, confirmations, responses)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>3. Data-Informed Management Support</h3>
+          <p>We turn the information in your portal into clear, practical management insight.</p>
+          <ul>
+            <li>Periodic summaries that show trends in tasks, renewals, and operational bottlenecks</li>
+            <li>Clean, shareable reports you can provide to lenders, partners, or internal stakeholders</li>
+            <li>Planning sessions that use real data from your operations instead of guesswork</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>4. Implementation &amp; Onboarding Services</h3>
+          <p>We handle the heavy lifting of setup so your team is not overwhelmed.</p>
+          <ul>
+            <li>Mapping your current systems (spreadsheets, shared drives, email, paper files) into a clear structure</li>
+            <li>Importing key documents and data into the portal</li>
+            <li>Configuring roles, permissions, and workflows that match how your business already operates</li>
+            <li>Training sessions in plain language for owners and staff, plus ongoing support as needed</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="credibility" class="glass">
+      <h2>Experience and Technology You Can Rely On</h2>
+      <p>
+        Canal Communications Inc is led by a seasoned business operator supported by a modern,
+        cloud-based management platform. We understand what lenders, partners, and serious clients
+        look for when they evaluate your company — and we design our systems and services to present
+        your business in the best possible light.
+      </p>
+      <ul>
+        <li>Background working with small and mid-sized businesses that need better organization, not more complexity</li>
+        <li>Practical focus: clear processes, simple dashboards, and straightforward communication instead of noisy “analytics”</li>
+        <li>Comfortable working with owners who prefer phone calls and concise summaries while still benefiting from up-to-date technology</li>
+      </ul>
+    </section>
+
+    <section id="faq" class="glass">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-accordion" role="list">
+        <details class="faq-item" role="listitem">
+          <summary>
+            <span>Do I need to replace my current systems to use Canal Communications?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-content">
+            <p>No. We work with what you already use. The portal helps organize and coordinate your existing documents, workflows, and tools without forcing unnecessary disruption.</p>
+          </div>
+        </details>
+
+        <details class="faq-item" role="listitem">
+          <summary>
+            <span>Is my company’s data secure?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-content">
+            <p>Yes. The portal uses secure, cloud-based infrastructure with controlled access permissions and role-based visibility.</p>
+          </div>
+        </details>
+
+        <details class="faq-item" role="listitem">
+          <summary>
+            <span>Can you help if my information is currently in paper files or spreadsheets?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-content">
+            <p>Absolutely. Many clients start with scattered files. We map and migrate your key information into a clean, organized structure—without overwhelming you.</p>
+          </div>
+        </details>
+
+        <details class="faq-item" role="listitem">
+          <summary>
+            <span>Do you work with owners who operate multiple companies?</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq-content">
+            <p>Yes. We can support single-entity and multi-entity structures under one owner, with clear separation and visibility where needed.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section id="contact" class="glass">
+      <h2>Speak With Canal Communications Inc</h2>
+      <p>
+        If you are an established or growing business and want to bring more structure, visibility, and
+        professionalism to how your company is managed, we invite you to schedule a short
+        introductory call or demo. There is no pressure; we simply review your current setup, show you
+        the portal, and share practical options for your situation.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <a class="contact-value" href="mailto:contact@canalcommunicationsgroupinc.com">
+            contact@canalcommunicationsgroupinc.com
+          </a>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-label">Phone</div>
+          <a class="contact-value" href="tel:+14243208689">
+            +1 (424) 320-8689
+          </a>
+        </div>
+
+        <div class="contact-item contact-span">
+          <div class="contact-label">Address</div>
+          <div class="contact-value" style="text-decoration:none;">
+            8484 WILSHIRE BOULEVARD SUITE 515<br/>
+            BEVERLY HILLS CA. 90211
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="glass footer">
+      <div class="footer-left">
+        <img class="footer-logo" src="assets-logos-logo-horizontal.png" alt="Canal Communications Group Inc">
+        <div class="footer-meta">
+          <div>© <span id="year"></span> Canal Communications Group Inc. All rights reserved.</div>
+          <div class="footer-links">
+            <a href="#services">Services</a><span class="dot">•</span>
+            <a href="#process">Process</a><span class="dot">•</span>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <a href="#about">Back to top</a>
+        <div class="footer-credit">
+          <small>
+            Website engineered by
+            <a href="https://edgelayersystems.com" target="_blank" rel="noopener">EdgeLayer Systems</a>
           </small>
         </div>
       </div>
