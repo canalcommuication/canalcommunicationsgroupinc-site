@@ -548,6 +548,61 @@
       margin: 0;
       line-height: 1.55;
     }
+    .card h3{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.mini-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background: rgba(41,183,255,0.95);
+  box-shadow: 0 0 12px rgba(41,183,255,0.6);
+  animation: miniDotPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes miniDotPulse{
+  0%,100%{transform:scale(1);opacity:.75;}
+  50%{transform:scale(1.3);opacity:1;}
+}
+.social-row{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:flex-end;
+  flex-wrap:wrap;
+}
+
+.social-btn{
+  width:40px;
+  height:40px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.social-btn svg{
+  width:18px;
+  height:18px;
+  fill: rgba(41,183,255,0.95);
+  filter: drop-shadow(0 0 8px rgba(41,183,255,0.55));
+}
+
+.social-btn:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.10);
+  box-shadow: 0 0 0 1px rgba(41,183,255,0.18), 0 0 18px rgba(41,183,255,0.16);
+}
+
+@media (max-width:640px){
+  .social-row{ justify-content:flex-start; }
+}
   </style>
 </head>
 
@@ -597,15 +652,15 @@
 
         <div class="cards">
           <div class="card">
-            <h3>Authority Presence</h3>
+            <h3><span class="mini-dot"></span>Authority Presence</h3>            
             <p>Professional brand structure + web presence aligned to your business direction.</p>
           </div>
           <div class="card">
-            <h3>Operational Structuring</h3>
+            <h3><span class="mini-dot"></span>Operational Structuring</h3>            
             <p>System setup for task flow, documentation, and repeatable processes.</p>
           </div>
           <div class="card">
-            <h3>Communication Alignment</h3>
+            <h3><span class="mini-dot"></span>Communication Alignment</h3>            
             <p>Clear messaging and a narrative framework you can confidently explain.</p>
           </div>
         </div>
@@ -856,6 +911,35 @@
           </small>
         </div>
       </div>
+      <div class="social-row" aria-label="Social media links">
+  <a class="social-btn" href="https://x.com/" target="_blank" rel="noopener" aria-label="X">
+    <!-- X -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M18.9 2H22l-6.8 7.8L23 22h-6.7l-5.2-6.8L5 22H2l7.3-8.4L1.5 2H8.4l4.7 6.1L18.9 2zM17.7 19.9h1.7L7.3 4H5.5l12.2 15.9z"/>
+    </svg>
+  </a>
+
+  <a class="social-btn" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+    <!-- LinkedIn -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20.45 20.45h-3.55v-5.6c0-1.34-.03-3.06-1.86-3.06-1.86 0-2.15 1.45-2.15 2.96v5.7H9.34V9h3.4v1.56h.05c.47-.9 1.62-1.86 3.33-1.86 3.56 0 4.22 2.35 4.22 5.4v6.35zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.11 20.45H3.56V9h3.55v11.45z"/>
+    </svg>
+  </a>
+
+  <a class="social-btn" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+    <!-- Facebook -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M13.5 22v-8h2.7l.4-3H13.5V9.1c0-.9.3-1.6 1.6-1.6h1.7V4.8c-.3 0-1.4-.1-2.7-.1-2.7 0-4.5 1.6-4.5 4.6V11H7v3h2.6v8h3.9z"/>
+    </svg>
+  </a>
+
+  <a class="social-btn" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+    <!-- Instagram -->
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4.5A3.5 3.5 0 1 1 8.5 12 3.5 3.5 0 0 1 12 8.5zm0 2A1.5 1.5 0 1 0 13.5 12 1.5 1.5 0 0 0 12 10.5zM17.8 6.2a.8.8 0 1 1-.8.8.8.8 0 0 1 .8-.8z"/>
+    </svg>
+  </a>
+</div>    
     </div>
 
   </main>
