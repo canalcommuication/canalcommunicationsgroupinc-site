@@ -593,8 +593,25 @@
   fill: rgba(41,183,255,0.95);
   filter: drop-shadow(0 0 8px rgba(41,183,255,0.55));
 }
+/* ===== Service Mini Dot ===== */
+.mini-dot{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  margin-right:10px;
+  background: rgba(41,183,255,0.95);
+  box-shadow:
+    0 0 10px rgba(41,183,255,0.55),
+    0 0 22px rgba(41,183,255,0.25);
+  transform: translateY(-1px);
+  animation: dotPulse 2.2s ease-in-out infinite;
+}
 
-.social-btn:hover{
+@keyframes dotPulse{
+  0%,100% { opacity: .55; }
+  50%     { opacity: 1; }
+}.social-btn:hover{
   transform: translateY(-1px);
   background: rgba(255,255,255,0.10);
   box-shadow: 0 0 0 1px rgba(41,183,255,0.18), 0 0 18px rgba(41,183,255,0.16);
@@ -603,6 +620,55 @@
 @media (max-width:640px){
   .social-row{ justify-content:flex-start; }
 }
+    @media (max-width: 640px){
+  .footer{
+    padding-bottom: 18px;
+  }
+
+  .footer-right{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-items:flex-start;
+  }
+
+  .footer-right a[href="#about"]{
+    order: 3;              /* pushes "Back to top" below socials */
+    margin-top: 6px;
+    align-self:flex-start; /* keeps it from floating awkwardly */
+  }
+
+  .social-row{
+    order: 2;
+    justify-content:flex-start;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  .footer-credit{
+    order: 1;
+  }
+/* ===== Topbar Mobile Cleanup ===== */
+.topbar{
+  flex-direction:column;
+  align-items:flex-start;
+  gap:10px;
+}
+
+.brand{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.nav{
+  width:100%;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+}  
   </style>
 </head>
 
