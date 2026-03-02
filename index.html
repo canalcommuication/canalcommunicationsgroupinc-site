@@ -743,60 +743,7 @@ section {
       </div>
 
       <!-- UPDATED: Right panel now has dots + intake form (no redundant pills) -->
-      <aside class="glass side hero-panel">
-        <div class="pillar-visual" aria-hidden="true">
-          <canvas id="pillar-dots"></canvas>
-        </div>
 
-        <div>
-          <div class="intake-head">Request an Intro Call</div>
-          <p class="intake-sub">Send your details. You’ll receive a response to schedule a short call and review your current setup.</p>
-
-          <form class="intake-form" action="https://formspree.io/f/xpqjbvdk" method="POST">
-            <div class="intake-grid">
-              <label>
-                <span>Full Name</span>
-                <input name="name" type="text" required />
-              </label>
-              <label>
-                <span>Company</span>
-                <input name="company" type="text" />
-              </label>
-              <label>
-                <span>Email</span>
-                <input name="email" type="email" required />
-              </label>
-              <label>
-                <span>Phone</span>
-                <input name="phone" type="tel" />
-              </label>
-            </div>
-
-            <label>
-              <span>Primary need</span>
-              <select name="primary_need" required>
-                <option value="" disabled selected>Select one</option>
-                <option>Organizing records & deadlines</option>
-                <option>Corporate presence consistency</option>
-                <option>Financing / due diligence readiness</option>
-                <option>Portal setup & onboarding</option>
-              </select>
-            </label>
-
-            <label>
-              <span>Short description</span>
-              <textarea name="message" rows="5" placeholder="Example: multiple entities, scattered files, renewals coming up, preparing for lender review…"></textarea>
-            </label>
-
-            <!-- Formspree subject / routing helpers -->
-            <input type="hidden" name="_subject" value="New Intake Request — Canal Communications Group Inc" />
-            <input type="hidden" name="_format" value="plain" />
-            <input type="hidden" name="_next" value="https://canalcommunicationsgroupinc.com/">            
-            <button type="submit" class="btn-primary">Submit Request</button>
-            <p class="fineprint">By submitting, you consent to be contacted about your request.</p>
-          </form>
-        </div>
-      </aside>
     </div>
 
     <section id="about" class="glass">
@@ -1010,6 +957,60 @@ section {
             BEVERLY HILLS CA. 90211
           </div>
         </div>
+              <aside class="glass side hero-panel">
+        <div class="pillar-visual" aria-hidden="true">
+          <canvas id="pillar-dots"></canvas>
+        </div>
+
+        <div>
+          <div class="intake-head">Request an Intro Call</div>
+          <p class="intake-sub">Send your details. You’ll receive a response to schedule a short call and review your current setup.</p>
+
+          <form class="intake-form" action="https://formspree.io/f/xpqjbvdk" method="POST">
+            <div class="intake-grid">
+              <label>
+                <span>Full Name</span>
+                <input name="name" type="text" required />
+              </label>
+              <label>
+                <span>Company</span>
+                <input name="company" type="text" />
+              </label>
+              <label>
+                <span>Email</span>
+                <input name="email" type="email" required />
+              </label>
+              <label>
+                <span>Phone</span>
+                <input name="phone" type="tel" />
+              </label>
+            </div>
+
+            <label>
+              <span>Primary need</span>
+              <select name="primary_need" required>
+                <option value="" disabled selected>Select one</option>
+                <option>Organizing records & deadlines</option>
+                <option>Corporate presence consistency</option>
+                <option>Financing / due diligence readiness</option>
+                <option>Portal setup & onboarding</option>
+              </select>
+            </label>
+
+            <label>
+              <span>Short description</span>
+              <textarea name="message" rows="5" placeholder="Example: multiple entities, scattered files, renewals coming up, preparing for lender review…"></textarea>
+            </label>
+
+            <!-- Formspree subject / routing helpers -->
+            <input type="hidden" name="_subject" value="New Intake Request — Canal Communications Group Inc" />
+            <input type="hidden" name="_format" value="plain" />
+            <input type="hidden" name="_next" value="https://canalcommunicationsgroupinc.com/">            
+            <button type="submit" class="btn-primary">Submit Request</button>
+            <p class="fineprint">By submitting, you consent to be contacted about your request.</p>
+          </form>
+        </div>
+      </aside>      
       </div>
     </section>
 
